@@ -22,5 +22,5 @@ from blog.views import post_model_list_view
 urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
-    path(r'^blog', include('blog.urls')),
+    path(r'^blog/', include('blog.urls')),
 ]
