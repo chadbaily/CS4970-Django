@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import PostModelForm
 from .models import PostModel
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -26,4 +27,12 @@ def post_model_create_view(request):
         context = {
             "form": PostModelForm()
         }
+    return render(request, template, context)
+
+def post_model_detail_view(request, id=None):
+    obj = get_object_or_404(PostModel, id=id)
+    context = {
+        "object": obj,
+    }
+    template = "blog/detail-view.html"
     return render(request, template, context)
