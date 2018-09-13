@@ -8,7 +8,11 @@ from .models import PostModel
 def post_model_list_view(request):
     qs = PostModel.objects.all()
     print(qs)
-    return HttpResponse("some data")
+    template = "blog/list-view.html"
+    context = {
+        "object_list": qs,
+    }
+    return render(request, template, context)
 
 def post_model_create_view(request):
     template = "blog/create-view.html"
