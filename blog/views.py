@@ -52,8 +52,16 @@ def post_model_update_view(request, id=None):
 
 def post_model_delete_view(request, id=None):
     obj = get_object_or_404(PostModel, id=id)
+    form = PostModelForm(request.POST or None)
     context = {
         "object": obj,
+        "form": form
     }
+    if form.is_valid():
+            instance = PostModel.objects.get(id=id)
+            instance.delete()
+            context = {
+                "form": PostModelForm()
+            }
     template = "blog/delete-view.html"
     return render(request, template, context)
