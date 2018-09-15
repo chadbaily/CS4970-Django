@@ -51,8 +51,8 @@ def post_model_update_view(request, id=None):
     }
     if request.method == 'POST' and form.is_valid():
         obj = PostModel.objects.get(id=id)
-        obj.title = form.title
-        obj.content = form.content
+        obj.title = form.fields.title
+        obj.content = form.fields.content
         obj.save()
         context = {
             "form": PostModelForm()
