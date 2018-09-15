@@ -50,8 +50,8 @@ def post_model_update_view(request, id=None):
         "form": form,
     }
     if request.method == 'POST' and form.is_valid():
-        obj.title = "this is a test"
-        obj.content = "hopefullt"
+        obj.title = request.POST['title']
+        obj.content = request.POST['content']
         obj.save()
         return HttpResponseRedirect(reverse('blog:list'))
     template = "blog/update-view.html"
