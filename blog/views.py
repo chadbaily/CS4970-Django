@@ -46,14 +46,16 @@ def post_model_update_view(request, id=None):
     obj = get_object_or_404(PostModel, id=id)
     form = PostModelForm(request.POST or None)
     context = {
-        "form": form
+        "object": obj,
+        "form": form,
     }
-    if form.is_valid():
+    if request.method == 'POST' and form.is_valid():
         obj = form.save(commit=False)
         obj.save()
         context = {
             "form": PostModelForm()
         }
+        return HttpResponseRedirect(reverse('blog:list'))
     template = "blog/update-view.html"
     return render(request, template, context)
 
